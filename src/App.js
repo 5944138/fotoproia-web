@@ -232,7 +232,25 @@ if(step==="upload"){const canPay=files.length>=8&&styles.length>0&&email.include
 <p style={{color:"var(--c4)",fontSize:".72rem",marginTop:6}}>Recibirás el enlace de descarga en este correo</p></div>
 
 {/* Pay */}
+
+{/* PREVIEW GRATIS */}
+{files.length>=8&&styles.length>0&&!canPay&&<div style={{padding:20,background:"var(--aglow)",borderRadius:"var(--rl)",marginBottom:20,textAlign:"center"}}>
+<p style={{fontSize:".86rem",fontWeight:600,color:"var(--accent)",marginBottom:8}}>📸 Completa tu email para ver el preview gratis</p>
+<p style={{fontSize:".76rem",color:"var(--c3)"}}>Te mostraremos cómo quedarían tus fotos antes de pagar</p></div>}
+
 {canPay&&<div>
+{/* Preview demo with watermark */}
+<div style={{marginBottom:20,padding:20,background:"var(--w2)",borderRadius:"var(--rl)",border:"1px solid var(--w4)"}}>
+<p style={{fontSize:".82rem",fontWeight:700,marginBottom:12,textAlign:"center"}}>Vista previa de tus fotos</p>
+<div style={{display:"grid",gridTemplateColumns:"repeat(3,1fr)",gap:6,marginBottom:12}}>
+{[0,1,2].map(i=><div key={i} style={{position:"relative",borderRadius:8,overflow:"hidden",aspectRatio:"3/4",background:"var(--w3)"}}>
+<img src={`${SB}/demos/demo_${styles.length>i?i:0}.webp`} alt="preview" style={{width:"100%",height:"100%",objectFit:"cover",filter:"blur(1px)"}}/>
+<div style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",background:"rgba(0,0,0,.15)"}}>
+<div style={{transform:"rotate(-25deg)",color:"rgba(255,255,255,.45)",fontSize:"1.1rem",fontWeight:800,letterSpacing:".1em",textShadow:"0 2px 8px rgba(0,0,0,.3)",fontFamily:"var(--f)"}}>FotoProIA</div>
+</div></div>)}
+</div>
+<p style={{fontSize:".72rem",color:"var(--c4)",textAlign:"center"}}>Las fotos reales serán generadas con TU rostro, sin watermark, en calidad {selectedPkg?.id==="basico"?"HD":"4K"}</p>
+</div>
 <div style={{background:"var(--w2)",borderRadius:"var(--r)",padding:16,marginBottom:14,border:"1px solid var(--w4)"}}>
 <div style={{display:"flex",justifyContent:"space-between",marginBottom:4,fontSize:".84rem"}}><span style={{color:"var(--c3)"}}>Plan {selectedPkg?.name}</span><span style={{fontWeight:700,fontFamily:"var(--fh)",fontSize:"1rem"}}>${selectedPkg?.price} USD</span></div>
 <div style={{fontSize:".76rem",color:"var(--c4)"}}>{files.length} selfies · {styles.length} estilo{styles.length>1?"s":""}</div></div>
